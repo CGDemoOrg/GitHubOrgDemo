@@ -18,6 +18,7 @@ jobs:
     - uses: actions/checkout@v2
     - name: Build with Maven
       run: mvn -B install --file pom.xml
+    
     - name: Deploy the package to the remote server
 
       uses: garygrossgarten/github-action-scp@release
@@ -26,12 +27,12 @@ jobs:
 
         local: target/DemoProject-0.0.1-SNAPSHOT.war
 
-        remote: C:/Users/mshinde2/Videos/apache-tomcat-8.5.51-windows-x64/apache-tomcat-8.5.51/webapps/Demo.war # My remote directory
+        remote: C:/Users/mshinde2/Videos/apache-tomcat-8.5.51-windows-x64/apache-tomcat-8.5.51/webapps/Demo.war
 
-        host: localhost
+        host: 'localhost'
         
-        port: 5656
+        port: '5656'
 
-        username: deployer
+        username: 'deployer'
 
-        password: deployer
+        password: 'deployer'
