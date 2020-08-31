@@ -9,7 +9,7 @@ on:
   pull_request:
     branches: [ master ]
 env: 
-  runs-on: self-hostedself-hosted
+  runs-on: local
 jobs:
   build:
 
