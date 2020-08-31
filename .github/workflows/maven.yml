@@ -19,10 +19,7 @@ jobs:
     - name: Build with Maven
       run: mvn -B install --file pom.xml
     - name: copy file
-      uses: canastro/copy-file-action@master
-      with:
-        source: "target/DemoProject-0.0.1-SNAPSHOT.war"
-        target: "C:/Users/mshinde2/Videos/apache-tomcat-8.5.51-windows-x64/apache-tomcat-8.5.51/webapps/Demo.war"
+      run : copy C:\Users\mshinde2\Videos\github-runner\actions-runner\_work\DemoProject\DemoProject\target\DemoProject-0.0.1-SNAPSHOT.war C:\Users\mshinde2\Videos\apache-tomcat-8.5.51-windows-x64\apache-tomcat-8.5.51\webapps\
     
 #     - name: Deploy the package to the remote server
 
