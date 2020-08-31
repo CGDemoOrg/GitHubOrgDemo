@@ -8,12 +8,11 @@ on:
     branches: [ master ]
   pull_request:
     branches: [ master ]
-env: 
-  runs-on: local
+  
 jobs:
   build:
 
-    runs-on: ubuntu-latest
+    runs-on: local
 
     steps:
     - uses: actions/checkout@v2
@@ -22,4 +21,4 @@ jobs:
       with:
         java-version: 1.8
     - name: Build with Maven
-      run: mvn -B package --file pom.xml
+      run: mvn -B install --file pom.xml
