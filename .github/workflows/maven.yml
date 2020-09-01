@@ -31,7 +31,7 @@ jobs:
       uses: garygrossgarten/github-action-scp@release
       with:
           local: "*/DemoProject-0.0.1-SNAPSHOT.war"
-          remote: "/home/ec2-user/remote_deploy/DemoProject.war"
+          remote: "/home/ec2-user/remote_deploy/"
           host: '15.207.42.252'
 #           host : '192.168.0.6'
           username: 'ec2-user'
