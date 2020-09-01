@@ -35,6 +35,8 @@ jobs:
           key: ${{ secrets.SSH_KEY }}
           passphrase: ${{ secrets.SSH_PASS_PHRASE }}
           rm: true
-          source: "/home/runner/work/DemoProject/DemoProject/target/DemoProject-0.0.1-SNAPSHOT.war"
+#           source: "/home/runner/work/DemoProject/DemoProject/target/DemoProject-0.0.1-SNAPSHOT.war"
+
+          source: "**/DemoProject-0.0.1-SNAPSHOT.war"
           target: "/home/ec2-user/remote_deploy"
     
