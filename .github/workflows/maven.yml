@@ -27,16 +27,26 @@ jobs:
     - uses: actions/checkout@v2
     - name: Build with Maven
       run: mvn -B install --file pom.xml
-    - name : Copying files to server
-      uses: appleboy/scp-action@master
+    - name: Copy single file to remote
+      uses: garygrossgarten/github-action-scp@release
       with:
+          local: "**/DemoProject-0.0.1-SNAPSHOT.war"
+          remote: "/home/ec2-user/remote_deploy"
           host: '15.207.42.252'
           username: 'ec2-user'
-          key: ${{ secrets.SSH_KEY }}
+          #password: ${{ secrets.PASSWORD }}
+          privateKey: ${{ secrets.SSH_KEY }}
           passphrase: ${{ secrets.SSH_PASS_PHRASE }}
-          rm: true
-#           source: "/home/runner/work/DemoProject/DemoProject/target/DemoProject-0.0.1-SNAPSHOT.war"
+#     - name : Copying files to server
+#       uses: appleboy/scp-action@master
+#       with:
+#           host: '15.207.42.252'
+#           username: 'ec2-user'
+#           key: ${{ secrets.SSH_KEY }}
+#           passphrase: ${{ secrets.SSH_PASS_PHRASE }}
+#           rm: true
+# #           source: "/home/runner/work/DemoProject/DemoProject/target/DemoProject-0.0.1-SNAPSHOT.war"
 
-          source: "DemoProject-0.0.1-SNAPSHOT.war"
-          target: "/home/ec2-user/remote_deploy"
+#           source: "DemoProject-0.0.1-SNAPSHOT.war"
+#           target: "/home/ec2-user/remote_deploy"
     
