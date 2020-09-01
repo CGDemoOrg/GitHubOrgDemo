@@ -32,10 +32,11 @@ jobs:
       with:
           local: "**/DemoProject-0.0.1-SNAPSHOT.war"
           remote: "/home/ec2-user/remote_deploy"
-          host: '15.207.42.252'
-          username: 'ec2-user'
+#           host: '15.207.42.252'
+          host : '192.168.0.6'
+          username: 'LIN25001684'
           #password: ${{ secrets.PASSWORD }}
-          privateKey: ${{ secrets.SSH_KEY }}
+          privateKey: ${{ secrets.SSH_LOCAL_KEY }}
           passphrase: ${{ secrets.SSH_PASS_PHRASE }}
 #     - name : Copying files to server
 #       uses: appleboy/scp-action@master
