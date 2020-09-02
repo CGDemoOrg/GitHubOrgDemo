@@ -22,10 +22,10 @@ jobs:
     - name: Build with Maven
       run: mvn -B install --file pom.xml
     - name: SonarQube Scan
-      uses: kitabisa/sonarqube-action@master
+      uses: monstar-lab-oss/sonarqube-github-action@v1.0.1
       with:
-        host: 'http://localhost:9090/'
-        login: '6b766a0a62896622f31a1cda45ced72aa803eb9d'
+        url: ${{ secrets.SONAR_HOST }}
+        token: ${{ secrets.SONAR_TOKEN }}
 #     - name: Copy single file to remote
 #       uses: garygrossgarten/github-action-scp@release
 #       with:
