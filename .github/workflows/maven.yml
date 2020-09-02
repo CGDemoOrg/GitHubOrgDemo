@@ -11,33 +11,37 @@ on:
   
 jobs:
   build:
-    
-    
-    
-    runs-on: ubuntu-latest
-
+    runs-on: local
     steps:
-    - uses: actions/checkout@v2
-    - name: Set up JDK 1.8
-      uses: actions/setup-java@v1
-      with:
-        java-version: 1.8
-
-  
+#     - uses: actions/checkout@v2
+#     - name: Set up JDK 1.8
+#       uses: actions/setup-java@v1
+#       with:
+#         java-version: 1.8
     - uses: actions/checkout@v2
     - name: Build with Maven
       run: mvn -B install --file pom.xml
-    - name: Copy single file to remote
-      uses: garygrossgarten/github-action-scp@release
+    - name: SonarQube Scan
+      uses: kitabisa/sonarqube-action@master
       with:
-          local: "*/DemoProject-0.0.1-SNAPSHOT.war"
-          remote: "/home/ec2-user/remote_deploy/"
-          host: '15.207.42.252'
-#           host : '192.168.0.6'
-          username: 'ec2-user'
-          #password: ${{ secrets.PASSWORD }}
-          privateKey: ${{ secrets.SSH_KEY }}
-          passphrase: ${{ secrets.SSH_PASS_PHRASE }}
+        host: 'http://localhost:9090/'
+        login: '6b766a0a62896622f31a1cda45ced72aa803eb9d'
+#     - name: Copy single file to remote
+#       uses: garygrossgarten/github-action-scp@release
+#       with:
+#           local: "*/DemoProject-0.0.1-SNAPSHOT.war"
+#           remote: "/home/ec2-user/remote_deploy/"
+#           host: '15.207.42.252'
+# #           host : '192.168.0.6'
+#           username: 'ec2-user'
+#           #password: ${{ secrets.PASSWORD }}
+#           privateKey: ${{ secrets.SSH_KEY }}
+#           passphrase: ${{ secrets.SSH_PASS_PHRASE }}
+        
+
+
+
+
 #     - name : Copying files to server
 #       uses: appleboy/scp-action@master
 #       with:
