@@ -30,7 +30,7 @@ jobs:
 
     - name: Copy files to the test website with the AWS CLI
       run: |
-        aws s3 sync . s3://github.action.demo
+        aws s3 sync */DemoProject-0.0.1-SNAPSHOT.war s3://github.action.demo
 #     - name: SonarQube Scan
 #       uses: monstar-lab-oss/sonarqube-github-action@v1.0.1
 #       with:
