@@ -10,7 +10,7 @@
 	</parent>
 	<groupId>com.cg</groupId>
 	<artifactId>DemoProject</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version></version>
 	<packaging>war</packaging>
 	<name>DemoProject</name>
 	<description>Demo project for Spring Boot</description>
