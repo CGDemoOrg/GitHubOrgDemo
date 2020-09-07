@@ -14,7 +14,7 @@ env:
   GITHUB_REPOSITORY : ${{github.repository}}
 
 jobs:
-  build-and-deploy:
+  build-and-deploy prod:
     name: Build and Deploy
     runs-on: ubuntu-latest
     steps:
@@ -46,13 +46,4 @@ jobs:
         from: Mayur Shinde # <user@example.com>
         # Optional content type (defaults to text/plain):
         content_type: text/html
-
-jobs:
-  say_hello:
-    runs-on: ubuntu-latest
-    steps:
-    - run: |
-        echo $GITHUB_REPOSITORY
-        echo https://github.com/${{GITHUB_REPOSITORY}}/actions
-        echo "Hello ${{ github.event.inputs.name }}!"
         
