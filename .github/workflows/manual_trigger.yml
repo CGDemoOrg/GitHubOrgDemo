@@ -3,17 +3,17 @@ on:
   workflow_dispatch:
     inputs:
       name:
-        description: 'Person to greet'
+        description: Branch Name
         required: true
-        default: 'Mona the Octocat'
-      home:
-        description: 'location'
-        required: false
+        
+
 
 jobs:
   say_hello:
     runs-on: ubuntu-latest
     steps:
     - run: |
+        echo "$GITHUB_REPOSITORY"
+        echo "https://github.com/$GITHUB_REPOSITORY/commit/$GITHUB_SHA/checks?check_suite_id=$GITHUB_CHECK_SUITE_ID"
         echo "Hello ${{ github.event.inputs.name }}!"
         echo "- in ${{ github.event.inputs.home }}!"
