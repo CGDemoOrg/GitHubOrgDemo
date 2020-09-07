@@ -13,7 +13,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - run: |
-        echo "$GITHUB_REPOSITORY"
-        echo "https://github.com/$GITHUB_REPOSITORY/commit/$GITHUB_SHA/checks?check_suite_id=$GITHUB_CHECK_SUITE_ID"
+        echo $GITHUB_REPOSITORY
+        echo "https://github.com/$GITHUB_REPOSITORY/actions"
         echo "Hello ${{ github.event.inputs.name }}!"
-        echo "- in ${{ github.event.inputs.home }}!"
+        
