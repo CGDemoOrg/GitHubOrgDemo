@@ -14,7 +14,7 @@ env:
   GITHUB_REPOSITORY : ${{github.repository}}
 
 jobs:
-  build-and-deploy prod:
+  build-and-deploy-prod:
     name: Build and Deploy
     runs-on: ubuntu-latest
     steps:
