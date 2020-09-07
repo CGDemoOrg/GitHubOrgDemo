@@ -44,7 +44,7 @@ jobs:
         password: ${{secrets.MAIL_PASSWORD}}
         subject: Github Actions job result
         # Literal body:
-        body: <html><body><p>Please click on the link below</p><p>https://github.com/${{env.GITHUB_REPOSITORY}}/actions</p></body></html>
+        body: <html><body><p>Please click on the link below</p><p><a href = "https://github.com/${{env.GITHUB_REPOSITORY}}/actions">Github Action Page</a></p></body></html>
         # Read file contents as body:
         to: mayurcapg@gmail.com
         from: Mayur Shinde # <user@example.com>
