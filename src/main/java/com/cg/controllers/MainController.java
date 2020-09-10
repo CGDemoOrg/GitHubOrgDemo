@@ -21,6 +21,7 @@ public class MainController {
 		return "world";
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 <<<<<<< HEAD
 <<<<<<< HEAD
@@ -36,11 +37,14 @@ public class MainController {
 	}
 >>>>>>> .theirs
 =======
+=======
+>>>>>>> 9d9b1d6... added feature 1
 	
 	@GetMapping("/feature1")
 	public String world() {
 		return "feature1";
 	}
+<<<<<<< HEAD
 >>>>>>> 9d9b1d6... added feature 1
 =======
 	
@@ -50,4 +54,6 @@ public class MainController {
 	}
 >>>>>>> 4f465ad... added feature3
 >>>>>>> 4916eae... added feature3
+=======
+>>>>>>> 9d9b1d6... added feature 1
 }
