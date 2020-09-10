@@ -20,4 +20,9 @@ public class MainController {
 	public String world() {
 		return "world";
 	}
+	
+	@GetMapping("/feature3")
+	public String feature3() {
+		return "feature3";
+	}
 }
