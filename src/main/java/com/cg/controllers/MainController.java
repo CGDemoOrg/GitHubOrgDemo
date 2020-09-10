@@ -20,31 +20,22 @@ public class MainController {
 	public String world() {
 		return "world";
 	}
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< .mine
 
-
-
-
-=======
 	@GetMapping("/feature2")
 	public String feature2() {
 		return "feature2";
 	}
->>>>>>> .theirs
-=======
+
 	
 	@GetMapping("/feature1")
-	public String world() {
+	public String world1() {
 		return "feature1";
 	}
->>>>>>> 9d9b1d6... added feature 1
-=======
+
 	
 	@GetMapping("/feature3")
 	public String feature3() {
 		return "feature3";
 	}
->>>>>>> 4f465ad... added feature3
+
 }
