@@ -21,7 +21,7 @@ public class MainController {
 		return "world";
 	}
 	@GetMapping("/feature2")
-	public String feature1() {
+	public String feature2() {
 		return "feature2";
 	}
 }
