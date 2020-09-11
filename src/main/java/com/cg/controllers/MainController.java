@@ -25,4 +25,9 @@ public class MainController {
 	public String feature3() {
 		return "feature3";
 	}
+	
+	@GetMapping("/feature4")
+	public String feature4() {
+		return "feature4";
+	}
 }
