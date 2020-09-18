@@ -18,7 +18,7 @@ env:
   GITHUB_REPOSITORY : ${{github.repository}}
 
 jobs:
-  build-and-deploy:
+  build:
     name: Build and Deploy
     runs-on: ubuntu-latest
     steps:
@@ -29,26 +29,51 @@ jobs:
         java-version: ${{ env.JAVA_VERSION }}
     - name: Build with Maven
       run: mvn package --file pom.xml
+    
+    
     - name: 'Deploy to Azure WebApp'
+      if : ${{ success() }}
       uses: azure/webapps-deploy@v2
       with: 
         app-name: ${{ env.AZURE_WEBAPP_NAME }}
         publish-profile: ${{ env.AZURE_WEBAPP_PUBLISH_PROFILE }}
         package: '${{ env.AZURE_WEBAPP_PACKAGE_PATH }}/target/*.war'
-    - name: Send mail
-      uses: dawidd6/action-send-mail@v2
+    
+    - name : 'Upload Artifact'
+      if :  ${{ success() }}
+    - uses : actions/upload-artifact@master
+      with :
+        name : DemoProject.war
+        path: ${{env.GITHUB_WORKSPACE}}/target/*.war
+
+    
+    - name : 'RollBack in case of failure'
+      if : ${{ failure() }}
+    - name : 'Download Artifact'
+    - uses: actions/download-artifact@v2
       with:
-        server_address: smtp.gmail.com
-        server_port: 465
-        username: ${{secrets.MAIL_USERNAME}}
-        password: ${{secrets.MAIL_PASSWORD}}
-        subject: Github Actions job result
-        # Literal body:
-        body: <html><body><p>Please click on the link below</p><p><a href = "https://github.com/${{env.GITHUB_REPOSITORY}}/actions">Github Action Page</a></p></body></html>
-        # Read file contents as body:
-        to: mayurcapg@gmail.com
-        from: Mayur Shinde # <user@example.com>
-        # Optional content type (defaults to text/plain):
-        content_type: text/html
+        name: DemoProject.war
+    - name: 'Deploy to Azure WebApp'
+      uses: azure/webapps-deploy@v2
+      with: 
+        app-name: ${{ env.AZURE_WEBAPP_NAME }}
+        publish-profile: ${{ env.AZURE_WEBAPP_PUBLISH_PROFILE }}
+        package: './*.war'
+        
+#     - name: Send mail
+#       uses: dawidd6/action-send-mail@v2
+#       with:
+#         server_address: smtp.gmail.com
+#         server_port: 465
+#         username: ${{secrets.MAIL_USERNAME}}
+#         password: ${{secrets.MAIL_PASSWORD}}
+#         subject: Github Actions job result
+#         # Literal body:
+#         body: <html><body><p>Please click on the link below</p><p><a href = "https://github.com/${{env.GITHUB_REPOSITORY}}/actions">Github Action Page</a></p></body></html>
+#         # Read file contents as body:
+#         to: mayurcapg@gmail.com
+#         from: Mayur Shinde # <user@example.com>
+#         # Optional content type (defaults to text/plain):
+#         content_type: text/html
 #         # Optional attachments:
 #         attachments: attachments.zip,git.diff,./dist/static/main.js
