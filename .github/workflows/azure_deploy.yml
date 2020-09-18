@@ -47,13 +47,15 @@ jobs:
         path: ${{env.GITHUB_WORKSPACE}}/target/*.war
 
     
-    - name : 'RollBack in case of failure'
-      if : ${{ failure() }}
+    
+      
     - name : 'Download Artifact'
+      if : ${{ failure() }}
     - uses: actions/download-artifact@v2
       with:
         name: DemoProject.war
     - name: 'Deploy to Azure WebApp'
+      if : ${{ failure() }}
       uses: azure/webapps-deploy@v2
       with: 
         app-name: ${{ env.AZURE_WEBAPP_NAME }}
