@@ -26,6 +26,7 @@ jobs:
     steps:
     - uses: actions/checkout@master
     - name: Build with Maven
+      id: build-step
       run: mvn package --file pom.xml
     - uses : actions/upload-artifact@master
       with :
@@ -34,16 +35,14 @@ jobs:
     - uses: actions/download-artifact@v2
       with:
         name: DemoProject.war
-    - name: Display structure of downloaded files
-      run: |
-            ls -R
-            pwd
-    - name: 'Deploy to Azure WebApp'
-      uses: azure/webapps-deploy@v2
-      with: 
-        app-name: ${{ env.AZURE_WEBAPP_NAME }}
-        publish-profile: ${{ env.AZURE_WEBAPP_PUBLISH_PROFILE }}
-        package: './DemoProject.war'
+
     - name : 'Check if steps have failed'
-      if : ${{ success() }}
+      if : ${{ steps.build-step.outcome == 'success' }}
       run: echo "In if block"
+#     - name: 'Deploy to Azure WebApp'
+#       uses: azure/webapps-deploy@v2
+#       with: 
+#         app-name: ${{ env.AZURE_WEBAPP_NAME }}
+#         publish-profile: ${{ env.AZURE_WEBAPP_PUBLISH_PROFILE }}
+#         package: './DemoProject.war'
+
