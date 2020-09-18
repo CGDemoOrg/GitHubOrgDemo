@@ -5,10 +5,11 @@ name: CI
 # Controls when the action will run. Triggers the workflow on push or pull request
 # events but only for the master branch
 on:
-  push:
-    branches: [ mayurjs26-rollback ]
-  pull_request:
-    branches: [ mayurjs26-rollback ]
+      workflow_dispatch:
+        inputs:
+          name:
+            description: Please Enter Branch Name
+            required: true
 
 env:
   GITHUB_REPOSITORY : ${{github.repository}}
