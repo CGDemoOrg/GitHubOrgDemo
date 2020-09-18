@@ -16,8 +16,8 @@ env:
   GITHUB_WORKSPACE : ${{ github.workspace }}
 
 jobs:
-  build-and-deploy:
-    name: Build and Deploy
+  upload-artifact:
+    name: RollBack
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@master
