@@ -41,7 +41,7 @@ jobs:
     
     - name : 'Upload Artifact'
       if :  ${{ success() }}
-    - uses : actions/upload-artifact@master
+      uses : actions/upload-artifact@master
       with :
         name : DemoProject.war
         path: ${{env.GITHUB_WORKSPACE}}/target/*.war
@@ -51,7 +51,7 @@ jobs:
       
     - name : 'Download Artifact'
       if : ${{ failure() }}
-    - uses: actions/download-artifact@v2
+      uses: actions/download-artifact@v2
       with:
         name: DemoProject.war
     - name: 'Deploy to Azure WebApp'
@@ -62,20 +62,20 @@ jobs:
         publish-profile: ${{ env.AZURE_WEBAPP_PUBLISH_PROFILE }}
         package: './*.war'
         
-#     - name: Send mail
-#       uses: dawidd6/action-send-mail@v2
-#       with:
-#         server_address: smtp.gmail.com
-#         server_port: 465
-#         username: ${{secrets.MAIL_USERNAME}}
-#         password: ${{secrets.MAIL_PASSWORD}}
-#         subject: Github Actions job result
-#         # Literal body:
-#         body: <html><body><p>Please click on the link below</p><p><a href = "https://github.com/${{env.GITHUB_REPOSITORY}}/actions">Github Action Page</a></p></body></html>
-#         # Read file contents as body:
-#         to: mayurcapg@gmail.com
-#         from: Mayur Shinde # <user@example.com>
-#         # Optional content type (defaults to text/plain):
-#         content_type: text/html
+    - name: Send mail
+      uses: dawidd6/action-send-mail@v2
+      with:
+        server_address: smtp.gmail.com
+        server_port: 465
+        username: ${{secrets.MAIL_USERNAME}}
+        password: ${{secrets.MAIL_PASSWORD}}
+        subject: Github Actions job result
+        # Literal body:
+        body: <html><body><p>Please click on the link below</p><p><a href = "https://github.com/${{env.GITHUB_REPOSITORY}}/actions">Github Action Page</a></p></body></html>
+        # Read file contents as body:
+        to: mayurcapg@gmail.com
+        from: Mayur Shinde # <user@example.com>
+        # Optional content type (defaults to text/plain):
+        content_type: text/html
 #         # Optional attachments:
 #         attachments: attachments.zip,git.diff,./dist/static/main.js
