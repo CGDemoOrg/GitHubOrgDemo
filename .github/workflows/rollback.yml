@@ -1,3 +1,4 @@
+
 # This is a basic workflow to help you get started with Actions
 
 name: RollBack
@@ -27,3 +28,8 @@ jobs:
       with :
         name : DemoProject.war
         path: ${{env.GITHUB_WORKSPACE}}/target/*.war
+    - uses: actions/download-artifact@v2
+      with:
+        name: DemoProject.war
+    - name: Display structure of downloaded files
+      run: ls -R
