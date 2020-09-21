@@ -49,7 +49,7 @@ jobs:
         
     - name : 'RollBack Step'
       id: rollback-step
-      if: steps.deploy-step == 'failure'    
+      if: steps.deploy-step.outcome == 'failure'    
       uses: actions/download-artifact@v2
       with:
         name: DemoProject.war
