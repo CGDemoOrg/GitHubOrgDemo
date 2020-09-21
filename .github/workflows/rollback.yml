@@ -34,7 +34,7 @@ jobs:
       uses: azure/webapps-deploy@v2
       with: 
         app-name: ${{ env.AZURE_WEBAPP_NAME }}
-        publish-profile: ${{ env.AZURE_WEBAPP_PUBLISH_PROFILE }}
+        publish-profile: ${{ env.AZURE_WEBAPP_PUBLISH_PROFIE }}
         package: '${{env.GITHUB_WORKSPACE}}/target/*.war'
     - name : 'Upload Artifact on successful deployment'  
       id: upload-artifact
