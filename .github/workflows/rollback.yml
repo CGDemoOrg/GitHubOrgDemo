@@ -37,7 +37,7 @@ jobs:
         publish-profile: ${{ env.AZURE_WEBAPP_PUBLISH_PROFIE }}
         package: '${{env.GITHUB_WORKSPACE}}/target/*.war'
       continue-on-error: true
-    - run: echo steps.build-step.outcome
+    - run: echo ${{steps.deploy-step.outcome}}
     - name : 'Upload Artifact on successful deployment'  
       id: upload-artifact
       if: steps.deploy-step.outcome == 'success'
