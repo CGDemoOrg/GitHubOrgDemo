@@ -28,17 +28,38 @@ jobs:
     - name: Build with Maven
       id: build-step
       run: mvn package --file pom.xml
-    - uses : actions/upload-artifact@master
+    - name : 'Deploy to Azure Webapp'
+      id : deploy-step
+      if: steps.build-step.outcome == 'success'
+      uses: azure/webapps-deploy@v2
+      with: 
+        app-name: ${{ env.AZURE_WEBAPP_NAME }}
+        publish-profile: ${{ env.AZURE_WEBAPP_PUBLISH_PROFILE }}
+        package: '${{env.GITHUB_WORKSPACE}}/target/*.war'
+    - name : 'Upload Artifact on successful deployment'  
+      id: upload-artifact
+      if: steps.deploy-step.outcome == 'success'
+      uses: actions/upload-artifact@master
       with :
         name : DemoProject.war
         path: ${{env.GITHUB_WORKSPACE}}/target/*.war
-    - uses: actions/download-artifact@v2
+        
+    - name : 'RollBack Step'
+      id: rollback-step    
+      uses: actions/download-artifact@v2
       with:
         name: DemoProject.war
+    - name : 'Deploy Previous version'
+      if : steps.rollback-step.outcome == 'success'
+      uses: azure/webapps-deploy@v2
+      with: 
+        app-name: ${{ env.AZURE_WEBAPP_NAME }}
+        publish-profile: ${{ env.AZURE_WEBAPP_PUBLISH_PROFILE }}
+        package: './DemoProject.war'
 
-    - name : 'Check if steps have failed'
-      if : ${{ steps.build-step.outcome == 'success' }}
-      run: echo "In if block"
+#     - name : 'Check if steps have failed'
+#       if : ${{ steps.build-step.outcome == 'success' }}
+#       run: echo "In if block"
 #     - name: 'Deploy to Azure WebApp'
 #       uses: azure/webapps-deploy@v2
 #       with: 
