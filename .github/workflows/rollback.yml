@@ -45,6 +45,7 @@ jobs:
       with :
         name : DemoProject.war
         path: ${{env.GITHUB_WORKSPACE}}/target/*.war
+      continue-on-error: true
         
     - name : 'RollBack Step'
       id: rollback-step
