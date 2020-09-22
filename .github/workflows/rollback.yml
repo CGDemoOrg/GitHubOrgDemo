@@ -54,6 +54,7 @@ jobs:
         
         
 #         if : ${{needs.build-deploy.result == 'failure'}}
+        needs: [build-deploy]
         name : RollBack-Step
         runs-on: ubuntu-latest
         steps:
