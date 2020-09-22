@@ -57,9 +57,9 @@ jobs:
     
   rollback : 
         
-        
+        needs: [build-deploy]
         if : ${{needs.build-deploy.outputs.deploy-status != 'success'}}
-#         needs: [build-deploy]
+#         
 #         if: ${{needs.build-deploy.result == 'failure'}}
         
         name : RollBack-Step
