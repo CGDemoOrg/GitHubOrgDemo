@@ -21,7 +21,9 @@ env:
 
 jobs:
   build-deploy:
+      
     name: Deploy
+    
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@master
@@ -41,7 +43,7 @@ jobs:
   rollback : 
         
         needs: [build-deploy]
-        if : jobs.build-deploy.steps.deploy-step.outcome == 'failure'
+        if : ${{needs.build-deploy.result == 'failure'}}
         name : RollBack-Step
         runs-on: ubuntu-latest
         steps:
