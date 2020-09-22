@@ -36,35 +36,14 @@ jobs:
         app-name: ${{ env.AZURE_WEBAPP_NAME }}
         publish-profile: ${{ env.AZURE_WEBAPP_PUBLISH_PROFIE }}
         package: '${{env.GITHUB_WORKSPACE}}/target/*.war'
-      continue-on-error: true
-    - run: echo ${{steps.deploy-step.outcome}}
-    - name : 'Upload Artifact on successful deployment'  
-      id: upload-artifact
-      if: steps.deploy-step.outcome == 'success'
-      uses: actions/upload-artifact@master
-      with :
-        name : DemoProject.war
-        path: ${{env.GITHUB_WORKSPACE}}/target/*.war
-      continue-on-error: true
         
-    - name : 'RollBack Step'
-      id: rollback-step
-      if: steps.deploy-step.outcome == 'failure'    
-      uses: actions/download-artifact@v2
-      with:
-        name: DemoProject.war
-    - name : 'Deploy Previous version'
-      if : steps.rollback-step.outcome == 'success'
-      uses: azure/webapps-deploy@v2
-      with: 
-        app-name: ${{ env.AZURE_WEBAPP_NAME }}
-        publish-profile: ${{ env.AZURE_WEBAPP_PUBLISH_PROFILE }}
-        package: './DemoProject.war'
-  
+    
   rollback : 
+        
+        needs: [build-deploy]
+        if : failure()
         name : RollBack-Step
         runs-on: ubuntu-latest
-        needs: [build-deploy]
         steps:
         - name : Checkout production
           id: checkout-prod
