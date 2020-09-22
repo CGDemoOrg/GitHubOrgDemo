@@ -25,8 +25,8 @@ jobs:
     name: Deploy
     
     runs-on: ubuntu-latest
-#     outputs:
-#       deploy-status: ${{ steps.set-status.outputs.status }}
+    outputs:
+      deploy-status: ${{ steps.set-status.outputs.status }}
 #       output2: ${{ steps.step2.outputs.test }}
     steps:
     - uses: actions/checkout@master
@@ -42,10 +42,15 @@ jobs:
         publish-profile: ${{ env.AZURE_WEBAPP_PUBLISH_ROFILE }}
         package: '${{env.GITHUB_WORKSPACE}}/target/*.war'
       continue-on-error: true
-#     - name : 'Set Status ' 
+    - name : 'Set Status Success' 
+      id: set-status
+      if: ${{steps.deploy-step.outcome == 'success'}}
+      run: echo "::set-output name=status::success"
+#     - name : 'Set Status Failure'
 #       id: set-status
-#       if: ${{steps.deploy-step.outcome == 'failure'}}
-#       run: echo "::set-output name=status::success"
+#       if: ${{steps.deploy-step.outcome == 'success'}}
+#       run: echo "::set-output name=status::success"  
+      
        
        
         
@@ -53,8 +58,8 @@ jobs:
   rollback : 
         
         
-#         if : ${{needs.build-deploy.result == 'failure'}}
-        needs: [build-deploy]
+        if : ${{needs.build-deploy.outputs.deploy-status != 'success'}}
+#         needs: [build-deploy]
 #         if: ${{needs.build-deploy.result == 'failure'}}
         
         name : RollBack-Step
