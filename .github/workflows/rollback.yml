@@ -41,7 +41,7 @@ jobs:
   rollback : 
         
         needs: [build-deploy]
-        if : failure()
+        if : jobs.build-deploy.steps.deploy-step.outcome == 'failure'
         name : RollBack-Step
         runs-on: ubuntu-latest
         steps:
