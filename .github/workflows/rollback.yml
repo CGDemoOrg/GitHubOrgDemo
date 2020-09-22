@@ -43,7 +43,7 @@ jobs:
   rollback : 
         
         
-        if : ${{build-deploy.result == 'failure'}}
+        if : ${{jobs.build-deploy.result == 'failure'}}
         name : RollBack-Step
         runs-on: ubuntu-latest
         steps:
