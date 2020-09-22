@@ -39,13 +39,13 @@ jobs:
       uses: azure/webapps-deploy@v2
       with: 
         app-name: ${{ env.AZURE_WEBAPP_NAME }}
-        publish-profile: ${{ env.AZURE_WEBAPP_PUBLISH_ROFILE }}
+        publish-profile: ${{ env.AZURE_WEBAPP_PUBLISH_PROFILE }}
         package: '${{env.GITHUB_WORKSPACE}}/target/*.war'
       continue-on-error: true
     - name : 'Set Status Success' 
       id: set-status
-      if: ${{steps.deploy-step.outcome == 'success'}}
-      run: echo "::set-output name=status::success"
+      if: ${{steps.deploy-step.outcome == 'failure'}}
+      run: echo "::set-output name=status::failure"
 #     - name : 'Set Status Failure'
 #       id: set-status
 #       if: ${{steps.deploy-step.outcome == 'success'}}
@@ -58,7 +58,7 @@ jobs:
   rollback : 
         
         needs: [build-deploy]
-        if : ${{needs.build-deploy.outputs.deploy-status != 'success'}}
+        if : ${{needs.build-deploy.outputs.deploy-status == 'failure'}}
 #         
 #         if: ${{needs.build-deploy.result == 'failure'}}
         
