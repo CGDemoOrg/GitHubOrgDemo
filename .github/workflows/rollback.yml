@@ -6,11 +6,8 @@ name: RollBack
 # Controls when the action will run. Triggers the workflow on push or pull request
 # events but only for the master branch
 on:
-      workflow_dispatch:
-        inputs:
-          name:
-            description: Please Enter Branch Name
-            required: true
+      push:
+            branches: production
 
 env:
   AZURE_WEBAPP_NAME: githubactiondemo  # set this to your application's name
@@ -42,7 +39,7 @@ jobs:
         publish-profile: ${{ env.AZURE_WEBAPP_PUBLISH_PROFILE }}
         package: '${{env.GITHUB_WORKSPACE}}/target/*.war'
       continue-on-error: true
-    - name : 'Set Status Success' 
+    - name : 'Set Status Failure' 
       id: set-status
       if: ${{steps.deploy-step.outcome == 'failure'}}
       run: echo "::set-output name=status::failure"
